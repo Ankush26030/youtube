@@ -1,0 +1,13 @@
+./src/main/java/com/github/youtubeify/YouTubeifyPlugin.java
+./src/main/java/com/github/youtubeify/source/YouTubeSourceManager.java
+./src/main/java/com/github/youtubeify/source/SpotifySourceManager.java
+./src/main/java/com/github/youtubeify/source/youtube/YouTubeAudioSourceManager.java
+./src/main/java/com/github/youtubeify/source/youtube/YouTubeAudioTrack.java
+./src/main/java/com/github/youtubeify/source/youtube/YouTubeAudioTrackInfo.java
+./src/main/java/com/github/youtubeify/source/spotify/SpotifyAudioSourceManager.java
+./src/main/java/com/github/youtubeify/source/spotify/SpotifyAudioTrack.java
+./src/main/java/com/github/youtubeify/source/spotify/SpotifyAudioTrackInfo.java
+./src/main/java/com/github/youtubeify/auth/SpotifyAuthManager.java
+./src/main/java/com/github/youtubeify/auth/YouTubeAuthManager.java
+./src/main/java/com/github/youtubeify/util/HttpUtils.java
+./src/main/java/com/github/youtubeify/util/TrackUtils.java

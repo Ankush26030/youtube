@@ -1,0 +1,92 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'com.github.youtubeify'
+version = '1.0.0'
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://m2.dv8tion.net/releases' }
+}
+
+dependencies {
+    // Lavalink API
+    compileOnly 'dev.arbjerg:lavalink-api:4.0.0'
+    
+    // LavaPlayer
+    compileOnly 'com.sedmelluq:lavaplayer:1.3.78'
+    
+    // JSON processing
+    implementation 'org.json:json:20220924'
+    
+    // HTTP components
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    
+    // Logging
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    
+    // Spring (required for Lavalink plugins)
+    compileOnly 'org.springframework:spring-context:5.3.23'
+    
+    // Test dependencies
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+}
+
+// Make sure the resources are included in the JAR
+processResources {
+    from('src/main/resources')
+}
+
+// Configure the shadow JAR task
+shadowJar {
+    archiveClassifier.set('')
+    dependencies {
+        exclude(dependency('com.sedmelluq:lavaplayer'))
+        exclude(dependency('dev.arbjerg:lavalink-api'))
+        exclude(dependency('org.springframework:spring-context'))
+    }
+}
+
+// Publishing to Maven local for testing
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            
+            pom {
+                name = 'YouTubeify'
+                description = 'A Lavalink plugin for long-term stable playback of YouTube and Spotify tracks'
+                url = 'https://github.com/yourusername/youtubeify'
+                
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        id = 'yourusername'
+                        name = 'Your Name'
+                        email = 'your.email@example.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Make the shadow JAR the default JAR
+build.dependsOn shadowJar
